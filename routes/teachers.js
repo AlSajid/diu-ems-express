@@ -26,8 +26,8 @@ router.post('/', async function (request, response, next) {
 
 });
 
-router.delete('/', async function (request, response, next) {
-    const id = request.query.id;
+router.delete('/:id', async function (request, response, next) {
+    const id = request.params.id;
     const database = await getDatabase();
     const query = { employee_ID: id };
     const result = await database.collection("teachers").deleteOne(query);
