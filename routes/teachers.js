@@ -1,12 +1,11 @@
 import express from 'express';
-import getDatabase from './../db/mongodb.js';
+import database from './../db/mongodb.js';
 import fetch from 'node-fetch';
 import { JSDOM } from 'jsdom';
 
 
 var router = express.Router();
 router.get('/', async function (request, response, next) {
-    const database = await getDatabase();
     const result = await database.collection("teachers").find({}).toArray();
     response.send(result);
 });
@@ -15,7 +14,6 @@ router.get('/', async function (request, response, next) {
 
 router.post('/', async function (request, response, next) {
     const info = request.body;
-    const database = await getDatabase();
 
     try {
         const result = await database.collection("teachers").insertOne(info);
@@ -28,7 +26,6 @@ router.post('/', async function (request, response, next) {
 
 router.delete('/:id', async function (request, response, next) {
     const id = request.params.id;
-    const database = await getDatabase();
     const query = { employee_ID: id };
     const result = await database.collection("teachers").deleteOne(query);
     response.send(result);

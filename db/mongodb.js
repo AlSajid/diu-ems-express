@@ -6,27 +6,11 @@ dotenv.config()
 // database configuration
 const config = {
     uri: process.env.ATLAS_URI,
-    dbName: "ems"
+    dbName: "cse"
 }
 
 
 const client = new MongoClient(config.uri);
-let database;
+const database = client.db(config.dbName);
 
-const getDatabase = async () => {
-
-    try {
-        await client.connect();
-        console.log("Connected to MongoDB server");
-
-        database = client.db(config.dbName);
-        return database;
-    }
-    catch (error) {
-        console.error(error)
-    }
-
-
-}
-
-export default getDatabase;
+export default database;
