@@ -1,5 +1,6 @@
 import express from 'express';
 import database from './../db/mongodb.js';
+import { ObjectId } from 'mongodb';
 
 
 var router = express.Router();
@@ -30,7 +31,7 @@ router.post('/', async function (request, response, next) {
 
 router.delete('/:id', async function (request, response, next) {
     const id = request.params.id;
-    const query = { employee_ID: id };
+    const query = { _id: ObjectId(id) };
 
     try {
         const result = await database.collection("courses").deleteOne(query);
