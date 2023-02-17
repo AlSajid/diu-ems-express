@@ -23,10 +23,12 @@ app.use(cookieParser());
 //routers
 import indexRouter from './routes/index.js';
 import teachersRouter from './routes/teachers.js';
+import coursesRouter from './routes/courses.js';
 
 // mount routers
 app.use('/', indexRouter);
 app.use('/teachers', teachersRouter);
+app.use('/courses', coursesRouter);
 
 export default app;
 
