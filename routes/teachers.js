@@ -2,10 +2,12 @@ import express from 'express';
 import database from './../db/mongodb.js';
 import fetch from 'node-fetch';
 import { JSDOM } from 'jsdom';
-import { ObjectId } from 'mongodb';
+import mongodb from 'mongodb';
 
 
-var router = express.Router();
+const router = express.Router();
+
+
 router.get('/', async function (request, response, next) {
     const result = await database.collection("teachers").find({}).toArray();
     response.send(result);
@@ -27,7 +29,7 @@ router.post('/', async function (request, response, next) {
 
 router.delete('/:id', async function (request, response, next) {
     const id = request.params.id;
-    const query = { _id: ObjectId(id) };
+    const query = { _id: new mongodb.ObjectId(id) };
     const result = await database.collection("teachers").deleteOne(query);
     response.send(result);
 });
