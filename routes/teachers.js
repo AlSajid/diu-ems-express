@@ -9,7 +9,8 @@ const router = express.Router();
 
 
 router.get('/', async function (request, response, next) {
-    const result = await database.collection("teachers").find({}).toArray();
+    const options = { sort: { name: 1 } }
+    const result = await database.collection("teachers").find({}, options).toArray();
     response.send(result);
 });
 
